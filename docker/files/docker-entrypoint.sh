@@ -5,6 +5,7 @@ FACTORIO_VOL=/factorio
 LOAD_LATEST_SAVE="${LOAD_LATEST_SAVE:-true}"
 GENERATE_NEW_SAVE="${GENERATE_NEW_SAVE:-false}"
 SAVE_NAME="${SAVE_NAME:-""}"
+BIND="${BIND:-""}"
 
 mkdir -p "$FACTORIO_VOL"
 mkdir -p "$SAVES"
@@ -87,6 +88,10 @@ FLAGS=(\
   --rcon-password "$(cat "$CONFIG/rconpw")" \
   --server-id /factorio/config/server-id.json \
 )
+
+if [ -n "$BIND" ]; then
+  FLAGS+=( --bind "$BIND" )
+fi
 
 if [[ $LOAD_LATEST_SAVE == true ]]; then
     FLAGS+=( --start-server-load-latest )

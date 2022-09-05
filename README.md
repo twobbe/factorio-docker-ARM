@@ -262,6 +262,7 @@ These are the environment variables which can be specified at container run time
 | GENERATE_NEW_SAVE | Generate a new save if one does not exist before starting the server  | false | 0.17+ |
 | LOAD_LATEST_SAVE | Load latest when true. Otherwise load SAVE_NAME | true | 0.17+ |
 | PORT | UDP port the server listens on | 34197 | 0.15+ |
+| BIND | IP address (v4 or v6) the server listens on (IP\[:PORT]) | | 0.15+ |
 | RCON_PORT | TCP port the rcon server listens on | 27015 | 0.15+ |
 | SAVE_NAME | Name to use for the save file | _autosave1 | 0.17+ |
 | TOKEN | factorio.com token | | 0.17+ |
@@ -382,6 +383,21 @@ For LAN games the VM needs an internal IP in order for clients to connect. One w
 ### Amazon Web Services (AWS) Deployment
 
 If you're looking for a simple way to deploy this to the Amazon Web Services Cloud, check out the [Factorio Server Deployment (CloudFormation) repository](https://github.com/m-chandler/factorio-spot-pricing). This repository contains a CloudFormation template that will get you up and running in AWS in a matter of minutes. Optionally it uses Spot Pricing so the server is very cheap, and you can easily turn it off when not in use.
+
+## Using a reverse proxy
+
+If you need to use a reverse proxy you can use the following nginx snippet:
+
+```
+stream {
+  server {
+      listen 34197 udp reuseport;
+      proxy_pass my.upstream.host:34197;
+  }
+}
+```
+
+If your factorio host uses multiple IP addresses (very common with IPv6), you might additionally need to bind Factorio to a single IP (otherwise the UDP proxy might get confused with IP mismatches). To do that pass the `BIND` envvar to the container: `docker run --network=host -e BIND=2a02:1234::5678 ...`
 
 ## Troubleshooting
 
