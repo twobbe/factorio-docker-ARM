@@ -48,20 +48,14 @@
       "1.0"
     ]
   },
-  "1.1.70": {
-    "sha256": "847f92be46cf877e6020beab904aabf60de7ba70ab2317532b4b92342c577315",
-    "tags": [
-      "1.1.70",
-      "stable"
-    ]
-  },
   "1.1.72": {
     "sha256": "ca5015a5aac8ba9576d3a85e95f49ae0a4c0fa3e667485759fe6fed0c49d6cc9",
     "tags": [
       "1.1.72",
       "1",
       "1.1",
-      "latest"
+      "latest",
+      "stable"
     ]
   }
 }
