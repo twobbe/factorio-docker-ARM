@@ -46,7 +46,7 @@ sudo docker run -d \
   -p 27015:27015/tcp \
   -v /opt/factorio:/factorio \
   --name factorio \
-  --restart=always \
+  --restart=unless-stopped \
   factoriotools/factorio
 ```
 
@@ -129,7 +129,7 @@ sudo docker run -d \
   -e LOAD_LATEST_SAVE=false \
   -e SAVE_NAME=replaceme \
   --name factorio \
-  --restart=always \
+  --restart=unless-stopped \
   factoriotools/factorio
 ```
 
@@ -144,7 +144,7 @@ sudo docker run -d \
   -e GENERATE_NEW_SAVE=true \
   -e SAVE_NAME=replaceme \
   --name factorio \
-  --restart=always \
+  --restart=unless-stopped \
   factoriotools/factorio
 ```
 
@@ -164,7 +164,7 @@ docker run -d \
   -p 27015:27015/tcp \
   -v /opt/factorio:/factorio \
   --name factorio \
-  --restart=always  \
+  --restart=unless-stopped  \
   --entrypoint "/scenario.sh" \
   factoriotools/factorio \
   MyScenarioName
@@ -180,7 +180,7 @@ docker run -d \
   -p 27015:27015/tcp \
   -v /opt/factorio:/factorio \
   --name factorio \
-  --restart=always  \
+  --restart=unless-stopped  \
   --entrypoint "/scenario2map.sh" \
   factoriotools/factorio
   MyScenarioName
@@ -211,8 +211,8 @@ Create file `config/server-banlist.json` and add the banlisted users.
 
 ```json
 [
-    "bad_person",
-    "other_bad_person"
+"bad_person",
+"other_bad_person"
 ]
 ```
 
@@ -222,8 +222,8 @@ Create file `config/server-adminlist.json` and add the adminlisted users.
 
 ```json
 [
-  "you",
-  "friend"
+"you",
+"friend"
 ]
 ```
 
@@ -364,7 +364,7 @@ sudo docker run -d \
   -p 27015:27015/tcp \
   -v /opt/factorio:/factorio \
   --name factorio \
-  --restart=always  \
+  --restart=unless-stopped  \
   factoriotools/factorio
 ```
 
