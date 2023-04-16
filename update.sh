@@ -48,10 +48,20 @@ else
 fi
 rm -f -- "$tmpfile"
 
+readme_tags=$(cat buildinfo.json | jq --sort-keys 'keys[]' | tac | (while read line
+do
+  tags="$tags\n* "$(cat buildinfo.json | jq --sort-keys ".$line.tags | sort | .[]"  | sed 's/"/`/g' | sed ':a; /$/N; s/\n/, /; ta')
+done && echo $tags"\n"))
+
+perl -i -0777 -pe "s/<!-- start autogeneration tags -->.+<!-- end autogeneration tags -->/<!-- start autogeneration tags -->$readme_tags<!-- end autogeneration tags -->/s" README.md
+
 git config user.name github-actions[bot]
 git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
 git add buildinfo.json
+git add README.md
 git commit -a -m "Auto Update Factorio to version: $version"
+
 git tag -f latest
 git push
 git push origin --tags -f
