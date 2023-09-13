@@ -8,7 +8,7 @@ ARG PUID=845
 ARG PGID=845
 
 #enable AARCH64 to emulate x86_64
-ARG QEMU_EXECVE=1
+ENV QEMU_EXECVE=1
 
 # version checksum of the archive to download
 ARG VERSION
